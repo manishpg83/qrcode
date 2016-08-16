@@ -3,18 +3,12 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
-$session = Yii::$app->session;
-$role = $session->get('role');
-/*echo "$role";*/
-
-
- /*Yii::$app->session['role'];*/
-
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        welcome role=<?php echo "$role";?>
+        <h1>Congratulations!</h1>
+
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>

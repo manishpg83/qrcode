@@ -70,13 +70,11 @@ class UserController extends Controller
         exit;*/
         if ($model->load(Yii::$app->request->post())) {
           
-
-            $imageName = $model->user_name;
-            $model->file =UploadedFile::getInstance($model,'file');
-            if($model->file != '')
+            $model->photo =UploadedFile::getInstance($model,'photo');
+            if($model->photo != '')
             {
-                $imageName = time().'.'.$model->file->extension;
-                $model->file->saveAs('upload/'.$imageName);
+                $imageName = time().'.'.$model->photo->extension;
+                $model->photo->saveAs('upload/'.$imageName);
                 $model->photo = $imageName;
             }
             $model->username = $model->email;
@@ -100,12 +98,11 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) ) {
-            $imageName = $model->user_name;
-            $model->file =UploadedFile::getInstance($model,'file');
-            if($model->file != '')
+            $model->photo =UploadedFile::getInstance($model,'photo');
+            if($model->photo != '')
             {
-                $imageName = time().'.'.$model->file->extension;
-                $model->file->saveAs('upload/'.$imageName);
+                $imageName = time().'.'.$model->photo->extension;
+                $model->photo->saveAs('upload/'.$imageName);
                 $model->photo = $imageName;
             }
            /* else

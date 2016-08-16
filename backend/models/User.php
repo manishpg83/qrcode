@@ -33,7 +33,7 @@ class User extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-     public $file;
+    //public $file;
     public static function tableName()
     {
         return 'user';

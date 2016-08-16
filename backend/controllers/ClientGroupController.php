@@ -68,11 +68,11 @@ class ClientGroupController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
            
-            $model->file =UploadedFile::getInstance($model,'file');
-            if($model->file != '')
+            $model->group_image =UploadedFile::getInstance($model,'group_image');
+            if($model->group_image != '')
             {
-                $imageName = time().'.'.$model->file->extension;
-                $model->file->saveAs('group_logo/'.$imageName);
+                $imageName = time().'.'.$model->group_image->extension;
+                $model->group_image->saveAs('group_logo/'.$imageName);
                 $model->group_image = $imageName;
             }
             $model->save();
@@ -96,12 +96,14 @@ class ClientGroupController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $imageName = $model->group_name;
-            $model->file =UploadedFile::getInstance($model,'file');
-            if($model->file != '')
+            $model->group_image =UploadedFile::getInstance($model,'group_image');
+           /* print_r(UploadedFile::getInstance($model,'group_image'));
+            exit;*/
+            if($model->group_image != '')
             {
-                $imageName = time().'.'.$model->file->extension;
-                $model->file->saveAs('Group_logo/'.$imageName);
+               
+                $imageName = time().'.'.$model->group_image->extension;
+                $model->group_image->saveAs('group_logo/'.$imageName);
                 $model->group_image = $imageName;
             }
             $model->save();

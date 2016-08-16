@@ -24,7 +24,8 @@ class ClientGroup extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public $file;
+    //public $file;
+    public $slug_url;
     public static function tableName()
     {
         return 'client_group';
@@ -36,9 +37,9 @@ class ClientGroup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'group_name', 'description', 'group_email_template', 'status', 'created_date'], 'required'],
-            [['user_id', 'status', 'created_date'], 'integer'],
-            [['description', 'group_email_template'], 'string'],
+            [['user_id', 'group_name', 'description', 'group_email_template', 'status'], 'required'],
+            [['user_id', 'status'], 'integer'],
+            [['description', 'group_email_template', 'group_image'], 'string'],
             [['group_name'], 'string', 'max' => 50],
             [['group_image'], 'string', 'max' => 100],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -54,7 +55,7 @@ class ClientGroup extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'group_name' => 'Group Name',
-            'file' => 'Group Image',
+            'group_image' => 'Group Image',
             'description' => 'Description',
             'group_email_template' => 'Group Email Template',
             'status' => 'Status',

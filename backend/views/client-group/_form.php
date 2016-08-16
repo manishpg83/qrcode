@@ -6,7 +6,6 @@ use yii\helpers\ArrayHelper;
 use common\models\User;
 
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\ClientGroup */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,37 +14,26 @@ use common\models\User;
 <div class="client-group-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?php /*echo $form->field($model, 'user_id')
-        ->dropDownList(
-                       // Flat array ('id'=>'label')
-            ['prompt'=>'']    // options
-        );*/?>
-    <?= Html::activeDropDownList($model, 'user_id',
-      ArrayHelper::map(User::find()->all(), 'id', 'user_name')) ?>
+
+    <? //= Html::activeDropDownList($model, 'user_id',
+  //    ArrayHelper::map(User::find()->all(), 'id', 'user_name')) ?>
 
     <?php
-    $dataCategory=ArrayHelper::map(\common\models\User::find()->asArray()->all(), 'id', 'user_name');
+    // Find()->where(['role_id' => 3])
+    $dataCategory=ArrayHelper::map(User::Find()->asArray()->where(['role_id' => 3])->all(), 'id', 'user_name');
     echo $form->field($model, 'user_id')->dropDownList($dataCategory, 
              ['prompt'=>'-Choose a Client-',
-              'onchange'=>'
-                $.post( "'.Yii::$app->urlManager->createUrl('client/getslug?id=').'"+$(this).val(), function( data ) {
-                  $( "select#title" ).html( data );
+              'onchange'=>'              
+                $.post( "'.Yii::$app->urlManager->createUrl('client/getslug').'&id="+$(this).val(), function( data ) {
+                  $("#clientgroup-slug_url" ).val( data );
                 });
             ']); 
  
-    $dataPost=ArrayHelper::map(\common\models\User::find()->asArray()->all(), 'id', 'User');
-    echo $form->field($model, 'user_id')
-        ->dropDownList(
-            $dataPost,           
-            ['id'=>'title']
-        );
+   
     ?>
+     <?= $form->field($model, 'slug_url')->textInput(['maxlength' => true, 'readonly' => 'readony']) ?>
 
-    <?php  //$form->field($model, 'user_id')->dropDownList(\common\models\User::getClientList(false)); ?>
-
-
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?php  //$form->field($model, 'user_id')->dropDownList(\common\models\User::getClientList(false)); ?>   
 
     <?= $form->field($model, 'group_name')->textInput(['maxlength' => true]) ?>
 
@@ -55,9 +43,8 @@ use common\models\User;
 
     <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'created_date')->textInput() ?>
-
-    <?= $form->field($model, 'file')->fileInput(['maxlength' => true]) ?>
+   
+    <?= $form->field($model, 'group_image')->fileInput(['maxlength' => true]) ?>
     <?php 
       if($model->group_image){
         echo '<img src="' . \yii::$app->request->BaseUrl.'/group_logo/' .$model->group_image.'" width="100px">';

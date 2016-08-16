@@ -35,7 +35,7 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'about')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model,'file')->fileInput(['maxlength' => true]) ?>
+    <?= $form->field($model,'photo')->fileInput(['maxlength' => true]) ?>
     <?php 
       if($model->photo){
         echo '<img src="' . \yii::$app->request->BaseUrl.'/upload/' .$model->photo.'" width="100px">';

@@ -107,6 +107,18 @@ class ClientController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionGetslug()
+    {   
+        $id = $_GET['id'];
+        $slug  = '';
+        if(isset($id))
+        {
+            if (($model = Client::findOne($id)) !== null) {
+            $slug = $model->slug_url;              
+            }    
+        }
+        return $slug;
+    }
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
